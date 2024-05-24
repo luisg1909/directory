@@ -1,10 +1,12 @@
-import {type User} from './types.d';
+import { SortBy, type User } from './types.d'
 
 interface Props{
   showColors: boolean
   users:User[]
+  changeSorting: (sort: SortBy) => void
+
 }
-export function UserList   ({ showColors,users }: Props)  {
+export function UserList   ({ changeSorting,  showColors,users }: Props)  {
   return (
     
     <table>
@@ -12,8 +14,8 @@ export function UserList   ({ showColors,users }: Props)  {
           <tr>
          <th>Picture</th>
           <th>Name</th> 
-          <th>Last </th> 
-          <th>County</th> 
+          <th>Last </th>         
+          <th className='pointer' onClick={() => { changeSorting(SortBy.COUNTRY) }}>Country</th>        
           <th>actions</th>
            </tr> 
       </thead> 
