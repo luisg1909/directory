@@ -32,7 +32,10 @@ const [users, setUsers] = useState<User[]>([])
   const handleReset = () => {
     setUsers(originalUsers.current)
   }
-  
+  const handleDelete = (email: string) => {
+    const filteredUsers = users.filter((user) => user.email !== email)
+    setUsers(filteredUsers)
+  }
   const handleChangeSort = (sort: SortBy) => {
     setSorting(sort)
   }
@@ -88,21 +91,21 @@ const [users, setUsers] = useState<User[]>([])
         draw files
         </button>
         <button onClick={toggleSortByCountry}>
-          {sorting === SortBy.COUNTRY ? 'No ordenar por país' : 'Ordenar por país'}
+          {sorting === SortBy.COUNTRY ? 'No sort by country' : 'Sort by country'}
         </button>
 
         <button onClick={handleReset}>
-          Resetear estado
+          Reset state
         </button>
 
-        <input placeholder='Filtra por país' onChange={(e) => {
+        <input placeholder='Sort by country' onChange={(e) => {
           setFilterCountry(e.target.value)
         }} />
 
 
       </header>
       <main>
-    <UserList changeSorting={handleChangeSort}  showColors={showColors} users={sortedUsers} />
+    <UserList changeSorting={handleChangeSort}  deleteUser={handleDelete} showColors={showColors} users={sortedUsers} />
  
       </main>
     
